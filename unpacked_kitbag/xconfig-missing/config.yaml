@@ -1,0 +1,61 @@
+# In order to minimize real system damage, these files will get copied into the backup directory.
+backup files: 
+  - "/etc/inittab"
+  - "/etc/X11/XF86Config"
+  - "/etc/X11/xorg.conf"
+# One or many descriptions of the type that a user would report to the system administrator. 
+description:
+  - Graphical login is not working.
+# This is a long-winded explanation of exactly what is broken and how to fix it. This file only exists if the user decides to give up and needs a reference.
+details: The /etc/X11/XF86Config file is missing.  To fix it, remake /etc/X11/XF86Config by running redhat-config-xfree86 or /etc/X11/Xorg.conf is missing, restore it from a backup or run system-config-display to regenerate it.
+# List of OS/Versions to which the module applies.
+os requirements:
+  - RHEL_3
+  - RHEL_4
+  - RHEL_5
+  - RHEL_6
+  - Fedora_2
+  - Fedora_13
+  - SUSE_9
+# These packages must be installed for this package to be valid
+package requirements:
+  RHEL_3:
+    - XFree86
+  RHEL_4:
+    - xorg-x11-server-Xorg
+    - initscripts
+  RHEL_5:
+    - xorg-x11-server-Xorg
+    - initscripts
+  RHEL_6:
+    - xorg-x11-server-Xorg
+    - initscripts
+  Fedora_2:
+    - xorg-x11
+    - initscripts
+  Fedora_13:
+    - xorg-x11-server-Xorg-x11
+    - initscripts
+  SUSE_9:
+    - aaa_base
+    - XFree86
+# These system calls must return true in order for this package to be valid, a - or ! preficing the the command indicates a perl file test, may need to enclose in quotes
+system requirements:
+  RHEL_3:
+    - '-e "/etc/X11/XF86Config"'
+  RHEL_4:
+    - '-e "/etc/X11/xorg.conf"'
+  RHEL_5:
+    - '-e "/etc/X11/xorg.conf"'
+  RHEL_6:
+    - '-e "/etc/X11/xorg.conf"'
+  Fedora_2:
+    - '-e "/etc/X11/xorg.conf"'
+  Fedora_13:
+    - '-e "/etc/X11/xorg.conf"'
+  SUSE_9:
+    - '-e "/etc/X11/XF86Config"'
+  COMMON:
+    - '-e "/etc/inittab"'
+# Actual trouble script
+trouble script: removexf86config.sh

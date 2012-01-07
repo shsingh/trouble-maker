@@ -1,0 +1,62 @@
+# In order to minimize real system damage, these files will get copied into the backup directory.
+backup files: 
+  - "/etc/sysconfig/iptables"
+  - "/etc/sysconfig/SuSEfirewall2"
+  - "/sbin/SuSEfirewall2"
+# This script will run and output to a file named backup.info in the backup directory.  Its use is optional but strongly encouraged.
+backup script: backup_iptables.sh
+# One or many descriptions of the type that a user would report to the system administrator. 
+description:
+  - FTP does not work
+  - Apache does not work
+  - Ssh does not work
+  - I cannot connect in
+# This is a long-winded explanation of exactly what is broken and how to fix it. This file only exists if the user decides to give up and needs a reference.
+details: The netfilter firewall (iptables) is blocking all incoming connections.  To fix it, adjust the rules reported by 'iptables -L'
+# List of OS/Versions to which the module applies.
+os requirements:
+  - RHEL_3
+  - RHEL_4
+  - RHEL_5
+  - RHEL_6
+  - Fedora_2
+  - Fedora_13
+  - SUSE_9
+# These packages must be installed for this package to be valid
+package requirements:
+  RHEL_3:
+    - iptables
+  RHEL_4:
+    - iptables
+  RHEL_5:
+    - iptables
+  RHEL_6:
+    - iptables
+  Fedora_2:
+    - iptables
+  Fedora_13:
+    - iptables
+  SUSE_9:
+    - iptables
+    - SuSEfirewall2
+# These system calls must return true in order for this package to be valid, a - or ! preficing the the command indicates a perl file test, may need to enclose in quotes
+system requirements:
+  RHEL_3:
+    - "chkconfig iptables on"
+  RHEL_4:
+    - "chkconfig iptables on"
+  RHEL_5:
+    - "chkconfig iptables on"
+  RHEL_6:
+    - "chkconfig iptables on"
+  Fedora_2:
+    - "chkconfig iptables on"
+  Fedora_13:
+    - "chkconfig iptables on"
+  SUSE_9:
+    - "chkconfig -f SuSEfirewall2_init on"
+    - "chkconfig -f SuSEfirewall2_setup on"
+    - "chkconfig -f SuSEfirewall2_final on"
+# Actual trouble script
+trouble script: iptables-blockall.sh
+

@@ -1,0 +1,45 @@
+# In order to minimize real system damage, these files will get copied into the backup directory.
+backup files: 
+  - "/etc/inittab"
+# One or many descriptions of the type that a user would report to the system administrator. 
+description:
+  - Machine will not boot
+# This is a long-winded explanation of exactly what is broken and how to fix it. This file only exists if the user decides to give up and needs a reference.
+details: All init levels were removed from /etc/inittab, to fix it, restore the file from the initscripts rpm or build it manually
+# List of OS/Versions to which the module applies.
+os requirements:
+  - RHEL_3
+  - RHEL_4
+  - RHEL_5
+  - RHEL_6
+  - Fedora_2
+  - Fedora_13
+  - SUSE_9
+# These packages must be installed for this package to be valid
+package requirements:
+  RHEL_3:
+    - SysVinit
+    - initscripts
+  RHEL_4:
+    - SysVinit
+    - initscripts
+  RHEL_5:
+    - SysVinit
+    - initscripts
+  RHEL_6:
+    - SysVinit
+    - initscripts
+  Fedora_2:
+    - SysVinit
+    - initscripts
+  Fedora_13:
+    - SysVinit
+    - initscripts
+  SUSE_9:
+    - aaa_base
+# These system calls must return true in order for this package to be valid, a - or ! preficing the the command indicates a perl file test, may need to enclose in quotes
+system requirements:
+  COMMON:
+    - '-e "/etc/inittab"'
+# Actual trouble script
+trouble script: removerunlevels.pl

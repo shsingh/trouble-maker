@@ -1,0 +1,51 @@
+# In order to minimize real system damage, these files will get copied into the backup directory.
+backup files: 
+  - "/boot/grub/grub.conf"
+# One or many descriptions of the type that a user would report to the system administrator. 
+description:
+  - The system will not boot
+# This is a long-winded explanation of exactly what is broken and how to fix it. This file only exists if the user decides to give up and needs a reference.
+details: The root device in the kernel is incorrect in grub.conf.  To fix it, change the root device to the device that maps to /.
+# List of OS/Versions to which the module applies.
+os requirements:
+  - RHEL_3
+  - RHEL_4
+  - RHEL_5
+  - RHEL_6
+  - Fedora_2
+  - Fedora_13
+  - SUSE_9
+# These packages must be installed for this package to be valid
+package requirements:
+  RHEL_3:
+    - grub
+  RHEL_4:
+    - grub
+  RHEL_5:
+    - grub
+  RHEL_6:
+    - grub
+  Fedora_2:
+    - grub
+  Fedora_13:
+    - grub
+  SUSE_9:
+    - grub
+# These system calls must return true in order for this package to be valid, a - or ! preficing the the command indicates a perl file test, may need to enclose in quotes
+system requirements:
+  Fedora_2:
+    - '-e "/boot/grub/grub.conf"'
+  Fedora_13:
+    - '-e "/boot/grub/grub.conf"'
+  RHEL_3:
+    - '-e "/boot/grub/grub.conf"'
+  RHEL_4:
+    - '-e "/boot/grub/grub.conf"'
+  RHEL_5:
+    - '-e "/boot/grub/grub.conf"'
+  RHEL_6:
+    - '-e "/boot/grub/grub.conf"'
+  SUSE_9:
+    - '-e "/boot/grub/menu.lst"'
+# Actual trouble script
+trouble script: grub-alter-root.pl

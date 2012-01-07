@@ -1,0 +1,51 @@
+# This file exists as an example.  It does nothing of any interest.
+#
+# REMEMBER THAT YAML DOESN'T SUPPORT TABS!!!!
+#
+# ==========================================================================================================
+# In order to minimize real system damage, these files will get copied into the backup directory.
+backup files: 
+  - "/path/to/file1"
+  - "/path/to/file2"
+  - "/path/to/file3"
+# This script will run and output to a file named backup.info in the backup directory.  Its use is optional but strongly encouraged.
+backup script: donothing.sh
+# One or many descriptions of the type that a user would report to the system administrator. 
+description:
+  - description 1
+  - description 2
+# This is a long-winded explanation of exactly what is broken and how to fix it. This file only exists if the user decides to give up and needs a reference.
+details: If this were a real script, it would have deleted all your files, caused various things to explode, and made prank calls to the local pizzaria.  To fix it, do nothing.
+# This script can be run to verify that the problem was actually fixed. Its use is optional but strongly encouraged.
+check script: donothing.sh
+# List of OS/Versions to which the module applies.
+os requirements:
+  - RHEL_3
+  - RHEL_4
+  - RHEL_5
+  - RHEL_6
+  - Fedora_2
+  - Fedora_13
+  - SUSE_9
+# These packages must be installed for this package to be valid
+package requirements:
+# These system calls must return true in order for this package to be valid, a - or ! preficing the the command indicates a perl file test, may need to enclose in quotes
+system requirements:
+  COMMON:
+    - '! -e "/tmp/bob"'
+  RHEL_3:
+    - cat /dev/null
+  RHEL_4:
+    - cat /dev/null
+  RHEL_5:
+    - cat /dev/null
+  RHEL_6:
+    - cat /dev/null
+  Fedora_2:
+    - cat /dev/null
+  Fedora_13:
+    - cat /dev/null
+  SUSE_9:
+    - '-d "/tmp"'
+# Actual trouble script
+trouble script: donothing.sh

@@ -1,0 +1,29 @@
+# In order to minimize real system damage, these files will get copied into the backup directory.
+backup files: 
+  - "/etc/pam.d/login"
+# One or many descriptions of the type that a user would report to the system administrator. 
+description:
+  - Cannot login to console
+# This is a long-winded explanation of exactly what is broken and how to fix it. This file only exists if the user decides to give up and needs a reference.
+details: "/etc/pam.d/login is missing.  To fix it, reinstall the file from the util-linux rpm"
+# List of OS/Versions to which the module applies.
+os requirements:
+  - RHEL_3
+  - RHEL_4
+  - RHEL_5
+  - RHEL_6
+  - Fedora_2
+  - Fedora_13
+  - SUSE_9
+# These packages must be installed for this package to be valid
+package requirements:
+#TODO: figure out how to check whether files/nis/ldap/etc are being used, and only run with files
+  COMMON:
+    - util-linux
+    - pam
+  SUSE_9:
+    - pwdutils
+# These system calls must return true in order for this package to be valid, a - or ! preficing the the command indicates a perl file test, may need to enclose in quotes
+system requirements:
+# Actual trouble script
+trouble script: removelogin.sh

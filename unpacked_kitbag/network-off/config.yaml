@@ -1,0 +1,39 @@
+# ==========================================================================================================
+# In order to minimize real system damage, these files will get copied into the backup directory.
+backup files: 
+  - "/etc/sysconfig/network"
+# One or many descriptions of the type that a user would report to the system administrator. 
+description:
+  - Networking is not working
+# This is a long-winded explanation of exactly what is broken and how to fix it. This file only exists if the user decides to give up and needs a reference.
+details: networking is turned off in /etc/sysconfig/network.  To fix it, edit the file and turn it on again.
+# List of OS/Versions to which the module applies.
+os requirements:
+  - RHEL_3
+  - RHEL_4
+  - RHEL_5
+  - RHEL_6
+  - Fedora_2
+  - Fedora_13
+  - SUSE_9
+# These packages must be installed for this package to be valid
+package requirements:
+# These system calls must return true in order for this package to be valid, a - or ! preficing the the command indicates a perl file test, may need to enclose in quotes
+# In this case, Redhat/Fedora have an extra step in networkdisable.pl.  Otherwise, it just turns it off at boot
+system requirements:
+  RHEL_3:
+    - "chkconfig network off"
+  RHEL_4:
+    - "chkconfig network off"
+  RHEL_5:
+    - "chkconfig network off"
+  RHEL_6:
+    - "chkconfig network off"
+  Fedora_2:
+    - "chkconfig network off"
+  Fedora_13:
+    - "chkconfig network off"
+  SUSE_9:
+    - "chkconfig -f network off"
+# Actual trouble script
+trouble script: networkdisable.pl
